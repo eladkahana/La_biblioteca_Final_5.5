@@ -1,9 +1,9 @@
 package com.repositories;
 
-import com.entities.Requests;
+import com.entities.RequestsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface RequestsRepository extends JpaRepository<Requests, Integer>, JpaSpecificationExecutor<Requests> {
+public interface RequestsRepository extends JpaRepository<RequestsEntity, Integer>  {
 
 }

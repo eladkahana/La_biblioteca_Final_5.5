@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.ResponesDTO;
-import com.entities.Respones;
+import com.entities.ResponesEntity;
 import com.repositories.ResponesRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class ResponesService {
     @Autowired
     private ResponesRepository responesRepository;
 
-    public Integer save(Respones vO) {
-        Respones bean = new Respones();
+    public Integer save(ResponesEntity vO) {
+        ResponesEntity bean = new ResponesEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = responesRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class ResponesService {
         responesRepository.deleteById(id);
     }
 
-    public void update(Integer id, Respones vO) {
-        Respones bean = requireOne(id);
+    public void update(Integer id, ResponesEntity vO) {
+        ResponesEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         responesRepository.save(bean);
     }
 
-    public ResponesDTO getById(Integer id) {
-        Respones original = requireOne(id);
+    public ResponesEntity getById(Integer id) {
+        ResponesEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<ResponesDTO> query(Respones vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private ResponesDTO toDTO(Respones original) {
-        ResponesDTO bean = new ResponesDTO();
+    private ResponesEntity toDTO(ResponesEntity original) {
+        ResponesEntity bean = new ResponesEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Respones requireOne(Integer id) {
+    private ResponesEntity requireOne(Integer id) {
         return responesRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.ReserveDTO;
-import com.entities.Reserve;
+import com.entities.ReserveEntity;
 import com.repositories.ReserveRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class ReserveService {
     @Autowired
     private ReserveRepository reserveRepository;
 
-    public Integer save(Reserve vO) {
-        Reserve bean = new Reserve();
+    public Integer save(ReserveEntity vO) {
+        ReserveEntity bean = new ReserveEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = reserveRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class ReserveService {
         reserveRepository.deleteById(id);
     }
 
-    public void update(Integer id, Reserve vO) {
-        Reserve bean = requireOne(id);
+    public void update(Integer id, ReserveEntity vO) {
+        ReserveEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         reserveRepository.save(bean);
     }
 
-    public ReserveDTO getById(Integer id) {
-        Reserve original = requireOne(id);
+    public ReserveEntity getById(Integer id) {
+        ReserveEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<ReserveDTO> query(Reserve vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private ReserveDTO toDTO(Reserve original) {
-        ReserveDTO bean = new ReserveDTO();
+    private ReserveEntity toDTO(ReserveEntity original) {
+        ReserveEntity bean = new ReserveEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Reserve requireOne(Integer id) {
+    private ReserveEntity requireOne(Integer id) {
         return reserveRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

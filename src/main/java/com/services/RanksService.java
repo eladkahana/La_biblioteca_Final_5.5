@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.RanksDTO;
-import com.entities.Ranks;
+import com.entities.RanksEntity;
 import com.repositories.RanksRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class RanksService {
     @Autowired
     private RanksRepository ranksRepository;
 
-    public Integer save(Ranks vO) {
-        Ranks bean = new Ranks();
+    public Integer save(RanksEntity vO) {
+        RanksEntity bean = new RanksEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = ranksRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class RanksService {
         ranksRepository.deleteById(id);
     }
 
-    public void update(Integer id, Ranks vO) {
-        Ranks bean = requireOne(id);
+    public void update(Integer id, RanksEntity vO) {
+        RanksEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         ranksRepository.save(bean);
     }
 
-    public RanksDTO getById(Integer id) {
-        Ranks original = requireOne(id);
+    public RanksEntity getById(Integer id) {
+        RanksEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<RanksDTO> query(Ranks vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private RanksDTO toDTO(Ranks original) {
-        RanksDTO bean = new RanksDTO();
+    private RanksEntity toDTO(RanksEntity original) {
+        RanksEntity bean = new RanksEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Ranks requireOne(Integer id) {
+    private RanksEntity requireOne(Integer id) {
         return ranksRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

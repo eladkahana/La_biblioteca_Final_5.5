@@ -1,7 +1,7 @@
 package com.services;
 
-import com.DTOs.AudienceDTO;
-import com.entities.Audience;
+
+import com.entities.AudienceEntity;
 import com.repositories.AudienceRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class AudienceService {
     @Autowired
     private AudienceRepository audienceRepository;
 
-    public Integer save(Audience vO) {
-        Audience bean = new Audience();
+    public Integer save(AudienceEntity vO) {
+        AudienceEntity bean = new AudienceEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = audienceRepository.save(bean);
         return bean.getId();
@@ -27,28 +27,25 @@ public class AudienceService {
         audienceRepository.deleteById(id);
     }
 
-    public void update(Integer id, Audience vO) {
-        Audience bean = requireOne(id);
+    public void update(Integer id, AudienceEntity vO) {
+        AudienceEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         audienceRepository.save(bean);
     }
 
-    public AudienceDTO getById(Integer id) {
-        Audience original = requireOne(id);
+    public AudienceEntity getById(Integer id) {
+        AudienceEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<AudienceDTO> query(Audience vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private AudienceDTO toDTO(Audience original) {
-        AudienceDTO bean = new AudienceDTO();
+    private AudienceEntity toDTO(AudienceEntity original) {
+        AudienceEntity bean = new AudienceEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Audience requireOne(Integer id) {
+    private AudienceEntity requireOne(Integer id) {
         return audienceRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

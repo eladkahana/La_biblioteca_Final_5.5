@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.AudienceDTO;
-import com.entities.Audience;
+import com.entities.AudienceEntity;
+import com.services.AudienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.AudienceService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class AudienceController {
     private AudienceService audienceService;
 
     @PostMapping
-    public String save(@Valid @RequestBody Audience vO) {
+    public String save(@Valid @RequestBody AudienceEntity vO) {
         return audienceService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class AudienceController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody Audience vO) {
+                       @Valid @RequestBody AudienceEntity vO) {
         audienceService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public AudienceDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public AudienceEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return audienceService.getById(id);
     }
 
-    @GetMapping
-    public Page<AudienceDTO> query(@Valid Audience vO) {
-        return audienceService.query(vO);
-    }
+
 }

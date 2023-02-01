@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.ReserveDTO;
-import com.entities.Reserve;
+import com.entities.ReserveEntity;
+import com.services.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.ReserveService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class ReserveController {
     private ReserveService reserveService;
 
     @PostMapping
-    public String save(@Valid @RequestBody Reserve vO) {
+    public String save(@Valid @RequestBody ReserveEntity vO) {
         return reserveService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class ReserveController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody Reserve vO) {
+                       @Valid @RequestBody ReserveEntity vO) {
         reserveService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public ReserveDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public ReserveEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return reserveService.getById(id);
     }
 
-    @GetMapping
-    public Page<ReserveDTO> query(@Valid Reserve vO) {
-        return reserveService.query(vO);
-    }
+
 }

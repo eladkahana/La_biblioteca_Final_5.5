@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.FirstNameDTO;
-import com.entities.FirstName;
+import com.entities.FirstNameEntity;
+import com.services.FirstNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.FirstNameService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class FirstNameController {
     private FirstNameService firstNameService;
 
     @PostMapping
-    public String save(@Valid @RequestBody FirstName vO) {
+    public String save(@Valid @RequestBody FirstNameEntity vO) {
         return firstNameService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class FirstNameController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody FirstName vO) {
+                       @Valid @RequestBody FirstNameEntity vO) {
         firstNameService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public FirstNameDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public FirstNameEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return firstNameService.getById(id);
     }
 
-    @GetMapping
-    public Page<FirstNameDTO> query(@Valid FirstName vO) {
-        return firstNameService.query(vO);
-    }
+
 }

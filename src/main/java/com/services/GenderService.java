@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.GenderDTO;
-import com.entities.Gender;
+import com.entities.GenderEntity;
 import com.repositories.GenderRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class GenderService {
     @Autowired
     private GenderRepository genderRepository;
 
-    public Integer save(Gender vO) {
-        Gender bean = new Gender();
+    public Integer save(GenderEntity vO) {
+        GenderEntity bean = new GenderEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = genderRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class GenderService {
         genderRepository.deleteById(id);
     }
 
-    public void update(Integer id, Gender vO) {
-        Gender bean = requireOne(id);
+    public void update(Integer id, GenderEntity vO) {
+        GenderEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         genderRepository.save(bean);
     }
 
-    public GenderDTO getById(Integer id) {
-        Gender original = requireOne(id);
+    public GenderEntity getById(Integer id) {
+        GenderEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<GenderDTO> query(Gender vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private GenderDTO toDTO(Gender original) {
-        GenderDTO bean = new GenderDTO();
+    private GenderEntity toDTO(GenderEntity original) {
+        GenderEntity bean = new GenderEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Gender requireOne(Integer id) {
+    private GenderEntity requireOne(Integer id) {
         return genderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

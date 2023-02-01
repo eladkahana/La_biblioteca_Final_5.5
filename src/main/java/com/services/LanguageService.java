@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.LanguageDTO;
-import com.entities.Language;
+import com.entities.LanguageEntity;
 import com.repositories.LanguageRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class LanguageService {
     @Autowired
     private LanguageRepository languageRepository;
 
-    public Integer save(Language vO) {
-        Language bean = new Language();
+    public Integer save(LanguageEntity vO) {
+        LanguageEntity bean = new LanguageEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = languageRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class LanguageService {
         languageRepository.deleteById(id);
     }
 
-    public void update(Integer id, Language vO) {
-        Language bean = requireOne(id);
+    public void update(Integer id, LanguageEntity vO) {
+        LanguageEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         languageRepository.save(bean);
     }
 
-    public LanguageDTO getById(Integer id) {
-        Language original = requireOne(id);
+    public LanguageEntity getById(Integer id) {
+        LanguageEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<LanguageDTO> query(Language vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private LanguageDTO toDTO(Language original) {
-        LanguageDTO bean = new LanguageDTO();
+    private LanguageEntity toDTO(LanguageEntity original) {
+        LanguageEntity bean = new LanguageEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Language requireOne(Integer id) {
+    private LanguageEntity requireOne(Integer id) {
         return languageRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

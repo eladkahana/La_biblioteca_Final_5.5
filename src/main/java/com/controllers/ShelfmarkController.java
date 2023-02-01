@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.ShelfmarkDTO;
-import com.entities.Shelfmark;
+import com.entities.ShelfmarkEntity;
+import com.services.ShelfmarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.ShelfmarkService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class ShelfmarkController {
     private ShelfmarkService shelfmarkService;
 
     @PostMapping
-    public String save(@Valid @RequestBody Shelfmark vO) {
+    public String save(@Valid @RequestBody ShelfmarkEntity vO) {
         return shelfmarkService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class ShelfmarkController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody Shelfmark vO) {
+                       @Valid @RequestBody ShelfmarkEntity vO) {
         shelfmarkService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public ShelfmarkDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public ShelfmarkEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return shelfmarkService.getById(id);
     }
 
-    @GetMapping
-    public Page<ShelfmarkDTO> query(@Valid Shelfmark vO) {
-        return shelfmarkService.query(vO);
-    }
+
 }

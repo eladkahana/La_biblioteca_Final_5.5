@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.RanksDTO;
-import com.entities.Ranks;
+import com.entities.RanksEntity;
+import com.services.RanksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.RanksService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class RanksController {
     private RanksService ranksService;
 
     @PostMapping
-    public String save(@Valid @RequestBody Ranks vO) {
+    public String save(@Valid @RequestBody RanksEntity vO) {
         return ranksService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class RanksController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody Ranks vO) {
+                       @Valid @RequestBody RanksEntity vO) {
         ranksService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public RanksDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public RanksEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return ranksService.getById(id);
     }
 
-    @GetMapping
-    public Page<RanksDTO> query(@Valid Ranks vO) {
-        return ranksService.query(vO);
-    }
+
 }

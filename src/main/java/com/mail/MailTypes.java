@@ -2,6 +2,12 @@ package com.mail;
 
 
 
+import com.DTOs.ReadersDTO;
+import com.controllers.ReadersController;
+import com.entities.Readers;
+import com.repositories.ReadersRepository;
+import com.services.ReadersService;
+
 import javax.persistence.ParameterMode;
 
 import javax.persistence.EntityManager;
@@ -55,7 +61,8 @@ public class MailTypes {
             content.append("<br> תודה רבה ויום טוב!<br>");
             content.append("<br> ספריית - La Biblioteca<br>");
 
-            Email email = new Email((String) item[1], "תזכורת להחזרת ספר", content.toString(), (byte[]) item[4]);
+            Email email = new Email((String) item[1], "תזכורת להחזרת ספר", content.toString());
+            email.setImage((byte[]) item[4]);
             email.SendEmail();
         }
 
@@ -63,12 +70,25 @@ public class MailTypes {
     }
 
     public void reaction(int ReaderID, String answer) {
-        //Email mail = new Email();
 
-//        ReadersController rc = new ReadersController();
-//        Readers reader = new Readers();
+//
+//        ReadersService RS = new ReadersService();
+//        ReadersController rc =  new ReadersController(RS);
+//        ReadersDTO reader = new ReadersDTO();
 //        reader = rc.getById(ReaderID);
-//        String email = reader.getEmail();
+//
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAPU");
+//        EntityManager em = emf.createEntityManager();
+//        StoredProcedureQuery sp = em.createStoredProcedureQuery("dbo.addRespone");
+//        sp.registerStoredProcedureParameter("requestID", Integer.class, ParameterMode.IN);
+//        sp.registerStoredProcedureParameter("content", String.class, ParameterMode.IN);
+//        sp.setParameter("requestID", ReaderID);
+//        sp.setParameter("content", answer);
+//        sp.execute();
+//
+//        Email email = new Email(reader.getEmail(),"מענה לפנייתך - מערכת ספרייה",answer);
+//        email.SendEmail();
+
 
     }
 }

@@ -4,12 +4,37 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="JPAPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.entities.AudienceEntity</class>
+    <class>com.entities.AudienceVsBookEntity</class>
+    <class>com.entities.AuthorEntity</class>
+    <class>com.entities.BookEntity</class>
+    <class>com.entities.BookVsAuthorEntity</class>
+    <class>com.entities.BookVsCategoryEntity</class>
+    <class>com.entities.CategoriesEntity</class>
+    <class>com.entities.CopiesEntity</class>
+    <class>com.entities.FirstNameEntity</class>
+    <class>com.entities.GenderEntity</class>
+    <class>com.entities.LanguageEntity</class>
+    <class>com.entities.LastNameEntity</class>
+    <class>com.entities.PublisherEntity</class>
+    <class>com.entities.RanksEntity</class>
+    <class>com.entities.ReadersEntity</class>
+    <class>com.entities.RequestsEntity</class>
+    <class>com.entities.ReserveEntity</class>
+    <class>com.entities.ResponesEntity</class>
+    <class>com.entities.SeriesBookEntity</class>
+    <class>com.entities.SeriesVsBookEntity</class>
+    <class>com.entities.ShelfmarkEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url"
                 value="jdbc:sqlserver://localhost:1433;database=La_biblioteca;encrypt=true;trustServerCertificate=true"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="325560928"/>
+      <property name="eclipselink.jdbc.url" value="jdbc:sqlserver://localhost:1433;database=La_biblioteca"/>
+      <property name="eclipselink.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="eclipselink.jdbc.user" value="elad"/>
+      <property name="eclipselink.jdbc.password" value="325560928"/>
     </properties>
   </persistence-unit>
 </persistence>

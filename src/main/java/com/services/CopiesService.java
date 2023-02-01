@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.CopiesDTO;
-import com.entities.Copies;
+import com.entities.CopiesEntity;
 import com.repositories.CopiesRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class CopiesService {
     @Autowired
     private CopiesRepository copiesRepository;
 
-    public Integer save(Copies vO) {
-        Copies bean = new Copies();
+    public Integer save(CopiesEntity vO) {
+        CopiesEntity bean = new CopiesEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = copiesRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class CopiesService {
         copiesRepository.deleteById(id);
     }
 
-    public void update(Integer id, Copies vO) {
-        Copies bean = requireOne(id);
+    public void update(Integer id, CopiesEntity vO) {
+        CopiesEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         copiesRepository.save(bean);
     }
 
-    public CopiesDTO getById(Integer id) {
-        Copies original = requireOne(id);
+    public CopiesEntity getById(Integer id) {
+        CopiesEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<CopiesDTO> query(Copies vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private CopiesDTO toDTO(Copies original) {
-        CopiesDTO bean = new CopiesDTO();
+    private CopiesEntity toDTO(CopiesEntity original) {
+        CopiesEntity bean = new CopiesEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Copies requireOne(Integer id) {
+    private CopiesEntity requireOne(Integer id) {
         return copiesRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

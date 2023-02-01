@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.LastNameDTO;
-import com.entities.LastName;
+import com.entities.LastNameEntity;
+import com.services.LastNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.LastNameService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class LastNameController {
     private LastNameService lastNameService;
 
     @PostMapping
-    public String save(@Valid @RequestBody LastName vO) {
+    public String save(@Valid @RequestBody LastNameEntity vO) {
         return lastNameService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class LastNameController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody LastName vO) {
+                       @Valid @RequestBody LastNameEntity vO) {
         lastNameService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public LastNameDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public LastNameEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return lastNameService.getById(id);
     }
 
-    @GetMapping
-    public Page<LastNameDTO> query(@Valid LastName vO) {
-        return lastNameService.query(vO);
-    }
+
 }

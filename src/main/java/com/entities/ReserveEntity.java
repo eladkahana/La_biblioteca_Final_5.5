@@ -1,0 +1,35 @@
+package com.entities;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.sql.Date;
+import java.util.Collection;
+@Data
+@Entity
+@Table(name = "Reserve", schema = "dbo", catalog = "La_biblioteca")
+public class ReserveEntity {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "reserveDate", nullable = false)
+    private Date reserveDate;
+    @Basic
+    @Column(name = "DueDate", nullable = false)
+    private Date dueDate;
+    @Basic
+    @Column(name = "ReturnDate", nullable = true)
+    private Date returnDate;
+    @Basic
+    @Column(name = "ReaderID", nullable = false)
+    private int readerId;
+    @Basic
+    @Column(name = "BookID", nullable = false)
+    private int bookId;
+    @Basic
+    @Column(name = "extensionID", nullable = true)
+    private Integer extensionId;
+
+}

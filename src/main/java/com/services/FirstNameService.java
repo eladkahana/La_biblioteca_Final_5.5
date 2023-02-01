@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.FirstNameDTO;
-import com.entities.FirstName;
+import com.entities.FirstNameEntity;
 import com.repositories.FirstNameRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class FirstNameService {
     @Autowired
     private FirstNameRepository firstNameRepository;
 
-    public Integer save(FirstName vO) {
-        FirstName bean = new FirstName();
+    public Integer save(FirstNameEntity vO) {
+        FirstNameEntity bean = new FirstNameEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = firstNameRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class FirstNameService {
         firstNameRepository.deleteById(id);
     }
 
-    public void update(Integer id, FirstName vO) {
-        FirstName bean = requireOne(id);
+    public void update(Integer id, FirstNameEntity vO) {
+        FirstNameEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         firstNameRepository.save(bean);
     }
 
-    public FirstNameDTO getById(Integer id) {
-        FirstName original = requireOne(id);
+    public FirstNameEntity getById(Integer id) {
+        FirstNameEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<FirstNameDTO> query(FirstName vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private FirstNameDTO toDTO(FirstName original) {
-        FirstNameDTO bean = new FirstNameDTO();
+    private FirstNameEntity toDTO(FirstNameEntity original) {
+        FirstNameEntity bean = new FirstNameEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private FirstName requireOne(Integer id) {
+    private FirstNameEntity requireOne(Integer id) {
         return firstNameRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

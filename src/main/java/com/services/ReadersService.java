@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.ReadersDTO;
-import com.entities.Readers;
+import com.entities.ReadersEntity;
 import com.repositories.ReadersRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class ReadersService {
     @Autowired
     private ReadersRepository readersRepository;
 
-    public Integer save(Readers vO) {
-        Readers bean = new Readers();
+    public Integer save(ReadersEntity vO) {
+        ReadersEntity bean = new ReadersEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = readersRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class ReadersService {
         readersRepository.deleteById(id);
     }
 
-    public void update(Integer id, Readers vO) {
-        Readers bean = requireOne(id);
+    public void update(Integer id, ReadersEntity vO) {
+        ReadersEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         readersRepository.save(bean);
     }
 
-    public ReadersDTO getById(Integer id) {
-        Readers original = requireOne(id);
+    public ReadersEntity getById(Integer id) {
+        ReadersEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<ReadersDTO> query(Readers vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private ReadersDTO toDTO(Readers original) {
-        ReadersDTO bean = new ReadersDTO();
+    private ReadersEntity toDTO(ReadersEntity original) {
+        ReadersEntity bean = new ReadersEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Readers requireOne(Integer id) {
+    private ReadersEntity requireOne(Integer id) {
         return readersRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

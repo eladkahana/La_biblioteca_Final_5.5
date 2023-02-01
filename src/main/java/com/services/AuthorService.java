@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.AuthorDTO;
-import com.entities.Author;
+import com.entities.AuthorEntity;
 import com.repositories.AuthorRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    public Integer save(Author vO) {
-        Author bean = new Author();
+    public Integer save(AuthorEntity vO) {
+        AuthorEntity bean = new AuthorEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = authorRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public void update(Integer id, Author vO) {
-        Author bean = requireOne(id);
+    public void update(Integer id, AuthorEntity vO) {
+        AuthorEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         authorRepository.save(bean);
     }
 
-    public AuthorDTO getById(Integer id) {
-        Author original = requireOne(id);
+    public AuthorEntity getById(Integer id) {
+        AuthorEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<AuthorDTO> query(Author vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private AuthorDTO toDTO(Author original) {
-        AuthorDTO bean = new AuthorDTO();
+    private AuthorEntity toDTO(AuthorEntity original) {
+        AuthorEntity bean = new AuthorEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Author requireOne(Integer id) {
+    private AuthorEntity requireOne(Integer id) {
         return authorRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

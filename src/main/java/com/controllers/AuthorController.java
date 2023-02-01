@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.AuthorDTO;
-import com.entities.Author;
+import com.entities.AuthorEntity;
+import com.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.AuthorService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @PostMapping
-    public String save(@Valid @RequestBody Author vO) {
+    public String save(@Valid @RequestBody AuthorEntity vO) {
         return authorService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class AuthorController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody Author vO) {
+                       @Valid @RequestBody AuthorEntity vO) {
         authorService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public AuthorDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public AuthorEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return authorService.getById(id);
     }
 
-    @GetMapping
-    public Page<AuthorDTO> query(@Valid Author vO) {
-        return authorService.query(vO);
-    }
+
 }

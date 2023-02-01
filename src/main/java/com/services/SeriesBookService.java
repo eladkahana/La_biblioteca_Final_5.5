@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.SeriesBookDTO;
-import com.entities.SeriesBook;
+import com.entities.SeriesBookEntity;
 import com.repositories.SeriesBookRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class SeriesBookService {
     @Autowired
     private SeriesBookRepository seriesBookRepository;
 
-    public Integer save(SeriesBook vO) {
-        SeriesBook bean = new SeriesBook();
+    public Integer save(SeriesBookEntity vO) {
+        SeriesBookEntity bean = new SeriesBookEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = seriesBookRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class SeriesBookService {
         seriesBookRepository.deleteById(id);
     }
 
-    public void update(Integer id, SeriesBook vO) {
-        SeriesBook bean = requireOne(id);
+    public void update(Integer id, SeriesBookEntity vO) {
+        SeriesBookEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         seriesBookRepository.save(bean);
     }
 
-    public SeriesBookDTO getById(Integer id) {
-        SeriesBook original = requireOne(id);
+    public SeriesBookEntity getById(Integer id) {
+        SeriesBookEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<SeriesBookDTO> query(SeriesBook vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private SeriesBookDTO toDTO(SeriesBook original) {
-        SeriesBookDTO bean = new SeriesBookDTO();
+    private SeriesBookEntity toDTO(SeriesBookEntity original) {
+        SeriesBookEntity bean = new SeriesBookEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private SeriesBook requireOne(Integer id) {
+    private SeriesBookEntity requireOne(Integer id) {
         return seriesBookRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

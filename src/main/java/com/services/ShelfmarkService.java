@@ -1,7 +1,6 @@
 package com.services;
 
-import com.DTOs.ShelfmarkDTO;
-import com.entities.Shelfmark;
+import com.entities.ShelfmarkEntity;
 import com.repositories.ShelfmarkRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ public class ShelfmarkService {
     @Autowired
     private ShelfmarkRepository shelfmarkRepository;
 
-    public Integer save(Shelfmark vO) {
-        Shelfmark bean = new Shelfmark();
+    public Integer save(ShelfmarkEntity vO) {
+        ShelfmarkEntity bean = new ShelfmarkEntity();
         BeanUtils.copyProperties(vO, bean);
         bean = shelfmarkRepository.save(bean);
         return bean.getId();
@@ -27,28 +26,25 @@ public class ShelfmarkService {
         shelfmarkRepository.deleteById(id);
     }
 
-    public void update(Integer id, Shelfmark vO) {
-        Shelfmark bean = requireOne(id);
+    public void update(Integer id, ShelfmarkEntity vO) {
+        ShelfmarkEntity bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         shelfmarkRepository.save(bean);
     }
 
-    public ShelfmarkDTO getById(Integer id) {
-        Shelfmark original = requireOne(id);
+    public ShelfmarkEntity getById(Integer id) {
+        ShelfmarkEntity original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<ShelfmarkDTO> query(Shelfmark vO) {
-        throw new UnsupportedOperationException();
-    }
 
-    private ShelfmarkDTO toDTO(Shelfmark original) {
-        ShelfmarkDTO bean = new ShelfmarkDTO();
+    private ShelfmarkEntity toDTO(ShelfmarkEntity original) {
+        ShelfmarkEntity bean = new ShelfmarkEntity();
         BeanUtils.copyProperties(original, bean);
         return bean;
     }
 
-    private Shelfmark requireOne(Integer id) {
+    private ShelfmarkEntity requireOne(Integer id) {
         return shelfmarkRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }

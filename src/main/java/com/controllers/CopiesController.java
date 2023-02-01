@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.CopiesDTO;
-import com.entities.Copies;
+import com.entities.CopiesEntity;
+import com.services.CopiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.CopiesService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class CopiesController {
     private CopiesService copiesService;
 
     @PostMapping
-    public String save(@Valid @RequestBody Copies vO) {
+    public String save(@Valid @RequestBody CopiesEntity vO) {
         return copiesService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class CopiesController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody Copies vO) {
+                       @Valid @RequestBody CopiesEntity vO) {
         copiesService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public CopiesDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public CopiesEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return copiesService.getById(id);
     }
 
-    @GetMapping
-    public Page<CopiesDTO> query(@Valid Copies vO) {
-        return copiesService.query(vO);
-    }
+
 }

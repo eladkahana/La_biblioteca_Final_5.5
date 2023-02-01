@@ -1,12 +1,11 @@
 package com.controllers;
 
-import com.DTOs.SeriesBookDTO;
-import com.entities.SeriesBook;
+import com.entities.SeriesBookEntity;
+import com.services.SeriesBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.services.SeriesBookService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class SeriesBookController {
     private SeriesBookService seriesBookService;
 
     @PostMapping
-    public String save(@Valid @RequestBody SeriesBook vO) {
+    public String save(@Valid @RequestBody SeriesBookEntity vO) {
         return seriesBookService.save(vO).toString();
     }
 
@@ -31,17 +30,14 @@ public class SeriesBookController {
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @RequestBody SeriesBook vO) {
+                       @Valid @RequestBody SeriesBookEntity vO) {
         seriesBookService.update(id, vO);
     }
 
     @GetMapping("/{id}")
-    public SeriesBookDTO getById(@Valid @NotNull @PathVariable("id") Integer id) {
+    public SeriesBookEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return seriesBookService.getById(id);
     }
 
-    @GetMapping
-    public Page<SeriesBookDTO> query(@Valid SeriesBook vO) {
-        return seriesBookService.query(vO);
-    }
+
 }

@@ -21,12 +21,16 @@ public class Email {
      * @param content - the content of the mail
      * @param image   - the image you can add to the message
      */
-    public Email(String to, String sub, String content, byte[] image) {
+    public Email(String to, String sub, String content) {
 
         this.from = "labibiliotica@gmail.com";
         this.to = to;
         this.sub = sub;
         this.content = content;
+
+    }
+
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
