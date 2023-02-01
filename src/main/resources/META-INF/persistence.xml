@@ -4,27 +4,27 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="JPAPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.entities.AudienceEntity</class>
-    <class>com.entities.AudienceVsBookEntity</class>
-    <class>com.entities.AuthorEntity</class>
-    <class>com.entities.BookEntity</class>
-    <class>com.entities.BookVsAuthorEntity</class>
-    <class>com.entities.BookVsCategoryEntity</class>
-    <class>com.entities.CategoriesEntity</class>
-    <class>com.entities.CopiesEntity</class>
-    <class>com.entities.FirstNameEntity</class>
-    <class>com.entities.GenderEntity</class>
-    <class>com.entities.LanguageEntity</class>
-    <class>com.entities.LastNameEntity</class>
-    <class>com.entities.PublisherEntity</class>
-    <class>com.entities.RanksEntity</class>
-    <class>com.entities.ReadersEntity</class>
-    <class>com.entities.RequestsEntity</class>
-    <class>com.entities.ReserveEntity</class>
-    <class>com.entities.ResponesEntity</class>
-    <class>com.entities.SeriesBookEntity</class>
-    <class>com.entities.SeriesVsBookEntity</class>
-    <class>com.entities.ShelfmarkEntity</class>
+    <class>comMain.entities.AudienceEntity</class>
+    <class>comMain.entities.AudienceVsBookEntity</class>
+    <class>comMain.entities.AuthorEntity</class>
+    <class>comMain.entities.BookEntity</class>
+    <class>comMain.entities.BookVsAuthorEntity</class>
+    <class>comMain.entities.BookVsCategoryEntity</class>
+    <class>comMain.entities.CategoriesEntity</class>
+    <class>comMain.entities.CopiesEntity</class>
+    <class>comMain.entities.FirstNameEntity</class>
+    <class>comMain.entities.GenderEntity</class>
+    <class>comMain.entities.LanguageEntity</class>
+    <class>comMain.entities.LastNameEntity</class>
+    <class>comMain.entities.PublisherEntity</class>
+    <class>comMain.entities.RanksEntity</class>
+    <class>comMain.entities.ReadersEntity</class>
+    <class>comMain.entities.RequestsEntity</class>
+    <class>comMain.entities.ReserveEntity</class>
+    <class>comMain.entities.ResponesEntity</class>
+    <class>comMain.entities.SeriesBookEntity</class>
+    <class>comMain.entities.SeriesVsBookEntity</class>
+    <class>comMain.entities.ShelfmarkEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url"
                 value="jdbc:sqlserver://localhost:1433;database=La_biblioteca;encrypt=true;trustServerCertificate=true"/>
