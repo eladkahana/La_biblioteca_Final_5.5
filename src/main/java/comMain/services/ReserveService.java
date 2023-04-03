@@ -5,7 +5,9 @@ import comMain.repositories.ReserveRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -47,4 +49,10 @@ public class ReserveService {
         return reserveRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
+
+    @Transactional(readOnly = true)
+    public List<Object[]> ReserveDaysLeft(String arrStr) {
+        return reserveRepository.ReserveDaysLeft(arrStr);
+    }
+
 }

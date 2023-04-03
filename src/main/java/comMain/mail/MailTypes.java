@@ -8,6 +8,12 @@ package comMain.mail;
 //import com.repositories.ReadersRepository;
 //import com.services.ReadersService;
 
+import comMain.controllers.ReadersController;
+import comMain.entities.ReadersEntity;
+import comMain.repositories.ReadersRepository;
+import comMain.services.ReadersService;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.ParameterMode;
 
 import javax.persistence.EntityManager;
@@ -70,11 +76,10 @@ public class MailTypes {
 
     public void reaction(int ReaderID, String answer) {
 
-//
-//        ReadersService RS = new ReadersService();
-//        ReadersController rc =  new ReadersController(RS);
-//        ReadersDTO reader = new ReadersDTO();
-//        reader = rc.getById(ReaderID);
+
+
+//        ReadersService rs = new ReadersService();
+//        ReadersEntity reader = rs.getById(ReaderID);
 //
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAPU");
 //        EntityManager em = emf.createEntityManager();

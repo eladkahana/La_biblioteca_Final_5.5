@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Validated
 @RestController
@@ -36,6 +37,12 @@ public class ReserveController {
     @GetMapping("/{id}")
     public ReserveEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return reserveService.getById(id);
+    }
+
+
+    @GetMapping("/ReserveDaysLeft")
+    public List<Object[]> getLateList(@RequestParam("arrStr") String arrStr){
+        return reserveService.ReserveDaysLeft(arrStr);
     }
 
 

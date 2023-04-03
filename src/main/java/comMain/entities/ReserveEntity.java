@@ -5,6 +5,13 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
+
+@NamedStoredProcedureQuery(name = "RserveDaysLeft", procedureName = "RserveDaysLeft",
+        parameters =
+       {@StoredProcedureParameter(name = "arrStr", type = String.class, mode = ParameterMode.IN),
+        @StoredProcedureParameter(name = "LateTable", type = List.class, mode = ParameterMode.OUT)})
+
 @Data
 @Entity
 @Table(name = "Reserve", schema = "dbo", catalog = "La_biblioteca")
