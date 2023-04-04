@@ -23,7 +23,7 @@ public class Email {
      */
     public Email(String to, String sub, String content) {
 
-        this.from = "labibiliotica@gmail.com";
+        this.from = "labiblioteca23@gmail.com";
         this.to = to;
         this.sub = sub;
         this.content = content;
@@ -44,7 +44,7 @@ public class Email {
         Session s = Session.getDefaultInstance(p, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("labibiliotica@gmail.com", "gorthvgwezibmcqn");
+                return new PasswordAuthentication("labiblioteca23@gmail.com", "cwbgakzcmcugonkd");
             }
         });
         try {

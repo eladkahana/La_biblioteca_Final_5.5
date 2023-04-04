@@ -41,7 +41,7 @@ public class ReserveController {
 
 
     @GetMapping("/ReserveDaysLeft")
-    public List<Object[]> getLateList(@RequestParam("arrStr") String arrStr){
+    public List<Object[]> ReserveDaysLeft(@RequestParam("arrStr") String arrStr){
         return reserveService.ReserveDaysLeft(arrStr);
     }
 
