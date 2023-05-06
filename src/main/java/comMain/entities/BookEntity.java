@@ -42,9 +42,6 @@ public class BookEntity {
     @Column(name = "coverImage", nullable = true)
     private byte[] coverImage;
     @Basic
-    @Column(name = "insertDate", nullable = false)
-    private Date insertDate;
-    @Basic
     @Column(name = "note", nullable = true, length = 2147483647)
     private String note;
 

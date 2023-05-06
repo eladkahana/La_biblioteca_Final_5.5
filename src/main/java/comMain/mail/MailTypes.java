@@ -19,11 +19,17 @@ import comMain.repositories.ReserveRepository;
 import comMain.services.ReadersService;
 import comMain.services.ReserveService;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.json.Json;
 import javax.persistence.ParameterMode;
 
 import javax.persistence.EntityManager;
@@ -35,7 +41,9 @@ import javax.ws.rs.HttpMethod;
 import java.net.URI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MailTypes {
 
@@ -105,23 +113,40 @@ public class MailTypes {
 
     }
 
-    public void reaction(int ReaderID, String answer) {
+    public void reaction(int requestID, String answer) {
 
 
 
-        ReadersService rs = new ReadersService();
-        ReadersEntity reader = rs.getById(ReaderID);
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAPU");
-        EntityManager em = emf.createEntityManager();
-        StoredProcedureQuery sp = em.createStoredProcedureQuery("dbo.addRespone");
-        sp.registerStoredProcedureParameter("requestID", Integer.class, ParameterMode.IN);
-        sp.registerStoredProcedureParameter("content", String.class, ParameterMode.IN);
-        sp.setParameter("requestID", ReaderID);
-        sp.setParameter("content", answer);
-        sp.execute();
 
-        Email email = new Email(reader.getEmail(),"מענה לפנייתך - מערכת ספרייה",answer);
+        String url = "http://localhost:8080/respones/addResponse";
+        RestTemplate restTemplate = new RestTemplate();
+
+        URI uri = UriComponentsBuilder.fromUriString(url)
+                .queryParam("requestID", requestID)
+                .queryParam("content", answer)
+                .build()
+                .toUri();
+
+        String response = restTemplate.postForObject(uri,null, String.class);
+
+
+
+
+
+
+
+
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAPU");
+//        EntityManager em = emf.createEntityManager();
+//        StoredProcedureQuery sp = em.createStoredProcedureQuery("dbo.addRespone");
+//        sp.registerStoredProcedureParameter("requestID", Integer.class, ParameterMode.IN);
+//        sp.registerStoredProcedureParameter("content", String.class, ParameterMode.IN);
+//        sp.setParameter("requestID", ReaderID);
+//        sp.setParameter("content", answer);
+//        sp.execute();
+
+        Email email = new Email(response,"מענה לפנייתך - מערכת ספרייה",answer);
         email.SendEmail();
 
 

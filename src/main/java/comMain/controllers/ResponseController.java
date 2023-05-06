@@ -1,8 +1,10 @@
 package comMain.controllers;
 
 import comMain.entities.ResponesEntity;
-import comMain.services.ResponesService;
+import comMain.services.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +14,10 @@ import javax.validation.constraints.NotNull;
 @Validated
 @RestController
 @RequestMapping("/respones")
-public class ResponesController {
+public class ResponseController {
 
     @Autowired
-    private ResponesService responesService;
+    private ResponseService responesService;
 
     @PostMapping
     public String save(@Valid @RequestBody ResponesEntity vO) {
@@ -37,6 +39,15 @@ public class ResponesController {
     public ResponesEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return responesService.getById(id);
     }
+
+
+    @PostMapping("/addResponse")
+    public String addResponse(@RequestParam("requestID") int requestID, @RequestParam("content") String content) {
+        return responesService.addResponse(requestID, content);
+    }
+
+
+
 
 
 }

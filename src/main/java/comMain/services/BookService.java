@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -46,5 +47,10 @@ public class BookService {
     private BookEntity requireOne(Integer id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+
+    public List<BookEntity> getAllBooks() {
+        return bookRepository.findAll();
     }
 }

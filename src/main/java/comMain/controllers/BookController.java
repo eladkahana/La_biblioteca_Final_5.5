@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Validated
 @RestController
@@ -36,6 +37,11 @@ public class BookController {
     @GetMapping("/{id}")
     public BookEntity getById(@Valid @NotNull @PathVariable("id") Integer id) {
         return bookService.getById(id);
+    }
+
+    @GetMapping
+    public List<BookEntity> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
 

@@ -1,18 +1,19 @@
 package comMain.services;
 
 import comMain.entities.ResponesEntity;
-import comMain.repositories.ResponesRepository;
+import comMain.repositories.ResponseRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
 @Service
-public class ResponesService {
+public class ResponseService {
 
     @Autowired
-    private ResponesRepository responesRepository;
+    private ResponseRepository responesRepository;
 
     public Integer save(ResponesEntity vO) {
         ResponesEntity bean = new ResponesEntity();
@@ -47,4 +48,12 @@ public class ResponesService {
         return responesRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
+
+    @Transactional
+    public String addResponse(int requestID, String content) {
+        return responesRepository.addResponse(requestID, content);
+    }
+
+
+
 }
